@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="mayi.mayi04_dat19.main" target="1.8" />
+      <module name="mayi.mayi04_dat19.test" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
