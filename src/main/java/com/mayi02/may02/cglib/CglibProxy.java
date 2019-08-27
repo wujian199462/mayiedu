@@ -1,6 +1,6 @@
 package com.mayi02.may02.cglib;
 
-import mayi02.may02.proxy.UserDaoImpl;
+import com.mayi02.may02.proxy.UserDaoImpl;
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;

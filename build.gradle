@@ -41,5 +41,17 @@ dependencies {
     compile group: 'org.springframework', name: 'spring-jdbc', version: '5.1.5.RELEASE'
 // https://mvnrepository.com/artifact/dom4j/dom4j
     compile group: 'dom4j', name: 'dom4j', version: '1.6.1'
+// https://mvnrepository.com/artifact/org.aspectj/aspectjrt
+    compile group: 'org.aspectj', name: 'aspectjrt', version: '1.9.4'
 
+// https://mvnrepository.com/artifact/mysql/mysql-connector-java
+    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.15'
+// https://mvnrepository.com/artifact/org.aspectj/aspectjweaver
+    compile group: 'org.aspectj', name: 'aspectjweaver', version: '1.9.2'
+    // https://mvnrepository.com/artifact/cglib/cglib
+    compile group: 'cglib', name: 'cglib', version: '3.2.12'
+    ///https://mvnrepository.com/artifact/javassist/javassist
+    compile group: 'javassist', name: 'javassist', version: '3.12.1.GA'
+    // https://mvnrepository.com/artifact/org.springframework/spring-aop
+    compile group: 'org.springframework', name: 'spring-aop', version: '5.1.4.RELEASE'
 }

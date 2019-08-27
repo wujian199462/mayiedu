@@ -1,7 +1,7 @@
 package com.mayi02.may02.jdkproxy;
 
-import mayi02.may02.proxy.UserDao;
-import mayi02.may02.proxy.UserDaoImpl;
+import com.mayi02.may02.proxy.UserDao;
+import com.mayi02.may02.proxy.UserDaoImpl;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;

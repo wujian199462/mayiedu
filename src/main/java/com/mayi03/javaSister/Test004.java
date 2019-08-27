@@ -1,5 +1,6 @@
 package com.mayi03.javaSister;
 
+import javassist.*;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

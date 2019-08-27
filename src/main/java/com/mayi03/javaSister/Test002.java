@@ -1,5 +1,8 @@
 package com.mayi03.javaSister;
 
+import javassist.*;
+
+
 import java.io.IOException;
 
 //使用java字节码技术创建字节码
