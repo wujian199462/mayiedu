@@ -11,6 +11,6 @@
         http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
 
-		<bean id="userService" class="com.itmayi04.day18.service.impl.UserServiceImpl"></bean>
+		<bean id="userService" class="com.mayi04.day18.service.impl.UserServiceImpl"></bean>
 
 </beans>

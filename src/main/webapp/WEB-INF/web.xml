@@ -6,8 +6,8 @@
 	<!-- Spring MVC 核心控制器 DispatcherServlet 配置 -->
 	<servlet>
 		<servlet-name>dispatcher</servlet-name>
-		<servlet-class>com.itmayi04.day20.springmvc.servlet.ExtDispatcherServlet
-		</servlet-class>
+		<servlet-class>com.mayi04.day20.springmvc.servlet.ExtDispatcherServlet
+        </servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>
