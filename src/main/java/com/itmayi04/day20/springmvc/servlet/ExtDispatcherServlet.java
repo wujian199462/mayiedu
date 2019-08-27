@@ -3,9 +3,13 @@ package com.itmayi04.day20.springmvc.servlet;
 import com.itmayi04.day20.springmvc.annotation.ExtController;
 import com.itmayi04.day20.springmvc.annotation.ExtRequestMapping;
 import com.itmayi04.day20.springmvc.utils.ClassUtil;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.List;
@@ -47,6 +51,51 @@ public class ExtDispatcherServlet extends HttpServlet {
         handleMapping();
     }
 
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        super.doGet(req, resp);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //#############处理请求#########
+        //1.获取亲求url地址
+        String requestURI = req.getRequestURI();
+        if(StringUtils.isEmpty(requestURI)){
+            return;
+        }
+        //2.从Map集合中获取控制对象
+        Object object = urlMethods.get(requestURI);
+        if(object==null){
+            resp.getWriter().println("not find 404 url");
+            return;
+        }
+        //3。使用url地址获取方法
+        String methodName = urlMethods.get(requestURI);
+        if(StringUtils.isEmpty(methodName)){
+            resp.getWriter().println("not found method");
+        }
+        //4。使用java的反射机制调用方法
+        String resultPage = (String) methodInvoke(object,methodName);
+        resp.getWriter().println(resultPage);
+        //5.是否Java的反射机制获取方法返回结果
+        //6.调用试图转换器渲染给页面展示
+    }
+
+    private Object methodInvoke(Object object,String methodName){
+        try {
+            Class<?> classInfo = object.getClass();
+            Method method = classInfo.getMethod(methodName);
+            Object result = method.invoke(object);
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
     //2 将扫包范围内所有的类，注入到springmvc容器中，存放到Map集合中 key为默认类名小写，value 对象
     public void findClasseMVCAnnotation(List<Class<?>> classes) throws IllegalAccessException, InstantiationException {
         for(Class<?> classInfo : classes){
@@ -70,7 +119,7 @@ public class ExtDispatcherServlet extends HttpServlet {
             //判断类上是否有url注解
             Class<? extends Object> classInfo = object.getClass();
             ExtRequestMapping declaredAnnotation = classInfo.getAnnotation(ExtRequestMapping.class);
-            String baseUrl = null;
+            String baseUrl = "";
             if(declaredAnnotation!=null){
                 //获取类上的url映射地址
                 baseUrl = declaredAnnotation.value();
