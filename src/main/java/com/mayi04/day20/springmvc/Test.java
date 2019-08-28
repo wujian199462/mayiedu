@@ -1,4 +1,4 @@
-package com.mayi04.day20;
+package com.mayi04.day20.springmvc;
 
 import java.util.concurrent.ConcurrentHashMap;
 

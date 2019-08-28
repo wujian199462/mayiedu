@@ -39,7 +39,8 @@ public class ExtDispatcherServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         //1.获取当前包下所有的类
-        List<Class<?>> classes = ClassUtil.getClasses("com.itmayi04.day20.springmvc.controller");
+        List<Class<?>> classes = ClassUtil.getClasses("com.mayi04.day20.springmvc.controller");
+
         //2 将扫包范围内所有的类，注入到springmvc容器中，存放到Map集合中 key为默认类名小写，value 对象
         try {
             findClasseMVCAnnotation(classes);
@@ -53,7 +54,8 @@ public class ExtDispatcherServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);
+        resp.setCharacterEncoding("UTF-8");
+        doPost(req, resp);
     }
 
     @Override
@@ -65,7 +67,7 @@ public class ExtDispatcherServlet extends HttpServlet {
             return;
         }
         //2.从Map集合中获取控制对象
-        Object object = urlMethods.get(requestURI);
+        Object object = urlBeans.get(requestURI);
         if(object==null){
             resp.getWriter().println("not find 404 url");
             return;
@@ -78,13 +80,20 @@ public class ExtDispatcherServlet extends HttpServlet {
         //4。使用java的反射机制调用方法
         String resultPage = (String) methodInvoke(object,methodName);
         resp.getWriter().println(resultPage);
-        //5.是否Java的反射机制获取方法返回结果
-        //6.调用试图转换器渲染给页面展示
+        //5.调用试图转换器渲染给页面展示
+        resourceViewResolver(resultPage,req,resp);
+
+    }
+
+    private void resourceViewResolver(String pageName,HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+        String prefix = "/";
+        String suffix = ".jsp";
+        request.getRequestDispatcher(prefix+pageName+suffix).forward(request,response);
     }
 
     private Object methodInvoke(Object object,String methodName){
         try {
-            Class<?> classInfo = object.getClass();
+            Class<? extends Object> classInfo = object.getClass();
             Method method = classInfo.getMethod(methodName);
             Object result = method.invoke(object);
             return result;
