@@ -54,4 +54,9 @@ dependencies {
     compile group: 'javassist', name: 'javassist', version: '3.12.1.GA'
     // https://mvnrepository.com/artifact/org.springframework/spring-aop
     compile group: 'org.springframework', name: 'spring-aop', version: '5.1.4.RELEASE'
+    // https://mvnrepository.com/artifact/org.mybatis/mybatis
+    compile group: 'org.mybatis', name: 'mybatis', version: '3.4.6'
+// https://mvnrepository.com/artifact/asm/asm
+    compile group: 'asm', name: 'asm', version: '3.3.1'
+
 }
