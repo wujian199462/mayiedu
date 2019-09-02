@@ -7,19 +7,16 @@ public class TestListSort {
 
 
     public static void main(String[] args) {
-        List<String> alist = new ArrayList<String>();
-        alist.add("a");
-        alist.add("c");
-        alist.add("b");
-        List<String> blist = new ArrayList<String>();
-        blist.add("e");
-        blist.add("f");
-        blist.add("d");
-
-        alist.addAll(blist);
-        System.out.println(alist.toString());
-        blist = alist;
-        System.out.println(blist.toString());
+        List<String> list = new ArrayList<>(1);
+        list.add("1");
+        list.add("2");
+        list.add("3");
+        list.add(1,"5");
+        //System.out.println(list.toString());
+        list.size();
+        list.add(5,"dasd");
+        System.out.println(list.toString());
     }
+
 
 }
