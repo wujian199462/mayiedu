@@ -11,10 +11,8 @@ public class TestListSort {
         list.add("1");
         list.add("2");
         list.add("3");
-        list.add(1,"5");
-        //System.out.println(list.toString());
-        list.size();
-        list.add(5,"dasd");
+
+        list.add(4,"dasd");
         System.out.println(list.toString());
     }
 

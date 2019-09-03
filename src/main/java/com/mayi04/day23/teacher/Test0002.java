@@ -12,5 +12,6 @@ public class Test0002 {
         }*/
         ExtList<String> extList = new ExtArrayList<String>();
         extList.add("as");
+        extList.add(10,"1223");
     }
 }
