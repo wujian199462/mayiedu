@@ -8,7 +8,7 @@ public class ExtHashMap<K,V> implements ExtMap<K,V> {
     //3.负载因子0.75扩容的时候才会用到 负载因子越小，hash冲突越小
     float DEFAULT_LOAD_FACTOR = 0.75f;
     //4.table 默认初始大小 16
-    static final int DEFAULT_INITIAL_CAPACITY = 1<<4; //16
+    static int DEFAULT_INITIAL_CAPACITY = 1<<4; //16
 
     @Override
     public V put(K key, V value) {
@@ -61,12 +61,14 @@ public class ExtHashMap<K,V> implements ExtMap<K,V> {
             //存放之前的table 原理的node
             Node<K,V> oldNode = table[i];
             while(oldNode != null){
+                table[i] = null;//赋值为null--为了垃圾回收机制能够回收
                 K oldK = oldNode.key;
                 //重新计算index
                 int index = getIndex(oldK,newTable.length);
                 //存放在之前的table 原来的 node next
                 Node<K,V> oldNext = oldNode.next;
-                //如果index 下标在新newTble
+                //如果index 下标在新newTble发生相同的时候，以链表进行存储
+                //原来的node的下一个是最新的（原来的nod存放下新的node下一个）
                 oldNode.next = newTable[index];
                 //将之前的node赋值给newTable[index]
                 newTable[index] = oldNext;
@@ -75,6 +77,9 @@ public class ExtHashMap<K,V> implements ExtMap<K,V> {
             }
         }
         //3.将newtable 赋值给老table
+        table = newTable;
+        DEFAULT_INITIAL_CAPACITY = newTable.length;
+        newTable = null;
     }
 
     //测试方法，打印所有的链表元素
